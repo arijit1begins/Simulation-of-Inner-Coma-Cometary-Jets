@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0036)http://www.comet-toolbox.com/FP.html -->
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <title>Inner Coma Cometary Dust Simulation</title>
+
+    <script async="" src="./FP Javascript_files/analytics.js"></script><script type="text/javascript" src="./FP Javascript_files/ga.js"></script><style type="text/css"></style>
+
+    <link rel="StyleSheet" href="./FP Javascript_files/FP.css" type="text/css">
+    
+    <script type="text/javascript" src="./FP Javascript_files/jquery.min.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/jquery.flot.dashes.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/jquery.flot.labels.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/jquery.flot.axislabels.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/ephemeris.js"></script>
+    <script type="text/javascript" src="./FP Javascript_files/FP_main.js"></script>
+    
+    <!-- Code to load the 3 example simulations -->
+    <script type="text/javascript">
+      function loadExample(ex_id) 
+      {
+          switchOE(0);
+          
+          if(ex_id==1)
+          {
+              document.getElementById("objectName").value = "P/2013 P5";
+              document.getElementById("e").value = ".1152352361939565";
+              document.getElementById("q").value = "1.936413591969857";
+              document.getElementById("i").value = "4.968636445431101";
+              document.getElementById("OM").value = "279.2913014466917";
+              document.getElementById("w").value = "144.2313764721612";
+              document.getElementById("Tp").value = "2456763.2359405034";
+              document.getElementById("synchrones").value = "5,10,15,20,25,30,35,40,45,50,55,60";
+              document.getElementById("beta").value = "0.05, 0.1, 0.15, 0.2";
+              document.getElementById("frogstep").value = "1";
+              document.getElementById("Tobs").value = "2013, 9, 10.0";
+          }
+          if(ex_id==2)
+          {
+              document.getElementById("objectName").value = "P/2013 P5";
+              document.getElementById("e").value = ".1152352361939565";
+              document.getElementById("q").value = "1.936413591969857";
+              document.getElementById("i").value = "4.968636445431101";
+              document.getElementById("OM").value = "279.2913014466917";
+              document.getElementById("w").value = "144.2313764721612";
+              document.getElementById("Tp").value = "2456763.2359405034";
+              document.getElementById("synchrones").value = "5,10,15,20,25,30,35,40,45,50,55,60";
+              document.getElementById("beta").value = "0.05, 0.1, 0.15, 0.2";
+              document.getElementById("frogstep").value = "1";
+              document.getElementById("Tobs").value = "2013, 9, 23.0";
+          }
+          if(ex_id==3)
+          {
+              document.getElementById("objectName").value = "C/2006 P1";
+              document.getElementById("e").value = "1.000019068501381";
+              document.getElementById("q").value = ".1707364427972129";
+              document.getElementById("i").value = "77.83699331528216";
+              document.getElementById("OM").value = "267.4147914157445";
+              document.getElementById("w").value = "155.974955723039";
+              document.getElementById("Tp").value = "2454113.2988538784";
+              document.getElementById("synchrones").value = "1,2,5,6,7,8,10";
+              document.getElementById("beta").value = "0.1, 0.2,0.3 0.4";
+              document.getElementById("frogstep").value = "1";
+              document.getElementById("Tobs").value = "2007, 1, 20.0";
+          }
+          if(ex_id==4)
+          {
+              document.getElementById("objectName").value = "C/2011 L4";
+              document.getElementById("e").value = "1.000032567234794";
+              document.getElementById("q").value = ".3015442747916172";
+              document.getElementById("i").value = "84.20821822815952";
+              document.getElementById("OM").value = "65.66587969973935";
+              document.getElementById("w").value = "333.6516262743606";
+              document.getElementById("Tp").value = "2456361.6699472531";
+              document.getElementById("synchrones").value = "5,10,15,20,25,30,35,40,45,50,55,60";
+              document.getElementById("beta").value = "0.05, 0.1, 0.15, 0.2";
+              document.getElementById("frogstep").value = "1";
+              document.getElementById("Tobs").value = "2013, 3, 24.875";
+          }
+          
+          FPDiagram();
+      }
+    </script>
+    
+</head>
+
+<body>
+    
+<div id="mainContainer">
+    <div id="div_header">
+        <span id="titleTxt">Inner Coma Comet Jets Simulation</span>
+    </div>
+    
+    <div id="div_navigation">
+        <table id="navigation" width="1080">
+            <tbody><tr>
+                <!--<td align="center" width="270"><a href="http://www.comet-toolbox.com/index.html">Home</a></td>-->
+                <td align="center" width="270"><a href="#"><u>Inner Coma Comet Jets Simulation By Arijit Das , Mentor: Dr. Pavan Chakravarty</u></a></td>
+                    <td align="center" width="270"><a href=""></a></td>
+                    <td align="center" width="270"><a href=""></a></td>
+            </tr>
+        </tbody></table>
+    </div>
+    
+    <div id="div_text">
+        The motion of dust particles in a cometary environment is a complex process, and a precise description of the trajectories of grains within the coma requires adavnced hydrodynamic models, taking into account the interaction between gas and dust released from the surface.<br>
+        In the tail, dust and gas are decoupled and the only significant forces affecting the grain trajectories are the solar gravity and radiation pressure. Both forces depend on the square of the heliocentric distance but work in opposite directions. Their sum can be seen as a reduced solar gravity, and the equation of motion is simply
+        <span class="equ">m*<b>a</b>=(1-beta)*<b>solar_gravity</b></span>,<br>
+        where beta is the ratio <span class="equ">radiation_pressure/solar_gravity</span>, and is inversely proportional to the size of the grains for particles larger than 1 micron.<br><br>
+        Model which describes the full tail geometry with a grid of <i>synchrones</i> and <i>syndynes</i>; lines representing respectively the locations of particles released at a same time, or with the same beta. This model is simple because it considers only particles released in the orbital plane of the comet, and with zero initial velocity, but it provides a very good approximation of the shape of the tail, and has been used successfully to study many comets.<br> 
+        One of the many strengths of this model is the possibility to date events in the tail. For instance, one can understand if regions of higher density are related to outbursts of the nucleus, or are a result of fragmentation of large chunks of material within the trail. It can also be used to disentangle between continuous activity, short outbursts, or impacts, when all these events produce a feature which at first look like a normal cometary tail.<br><br>
+
+        <br>
+        
+        <noscript>&lt;br&gt;&lt;br&gt;&lt;b&gt;This tool requires that you have enabled Javacript in your browser.&lt;/b&gt;</noscript>
+    </div>    
+      
+    <div id="diagram">
+        <div id="placeholder" style="padding: 0px;"><canvas class="flot-base" width="900" height="900" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 600px; height: 600px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 510px; text-align: center;">0.60</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 430px; text-align: center;">0.70</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 350px; text-align: center;">0.80</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 270px; text-align: center;">0.90</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 190px; text-align: center;">1.00</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 75px; top: 558px; left: 110px; text-align: center;">1.10</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 515px; left: 26px; text-align: right;">18</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 462px; left: 26px; text-align: right;">19</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 410px; left: 26px; text-align: right;">20</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 357px; left: 26px; text-align: right;">21</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 304px; left: 26px; text-align: right;">22</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 251px; left: 26px; text-align: right;">23</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 198px; left: 26px; text-align: right;">24</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 145px; left: 26px; text-align: right;">25</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 92px; left: 26px; text-align: right;">26</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 39px; left: 26px; text-align: right;">27</div></div></div><canvas class="flot-overlay" width="900" height="900" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 600px; height: 600px;"></canvas><div class="legend"><div style="position: absolute; width: 91px; height: 82px; top: 13px; right: 13px; opacity: 0.85; background-color: rgb(255, 255, 255);"> </div><table style="position:absolute;top:13px;right:13px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #000000;overflow:hidden"></div></div></td><td class="legendLabel">Synchrones</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #888888;overflow:hidden"></div></div></td><td class="legendLabel">Syndynes</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #ffa500;overflow:hidden"></div></div></td><td class="legendLabel">Sun</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #0000ff;overflow:hidden"></div></div></td><td class="legendLabel">Velocity</td></tr></tbody></table></div></div>
+    </div>
+
+    <div id="Controls">
+      <form>
+<!-- TEST 2013P5, custom input-->
+        <span class="subsection">Object name (optional): <input type="text" id="objectName" value="P/2013 P5"></span>
+          
+        <div id="inputOE_custom" style="display: block;">
+            <span class="subsection"><br>Orbital elements (custom)</span>
+            <table>
+              <tbody><tr>
+                <td class="leftColumn">e (eccentricity):</td>
+                <td><input type="text" id="e" value=".1152352361939565"></td>
+              </tr>
+              <tr>
+                <td class="leftColumn">q (perihelion distance in AU):</td>
+                <td><input type="text" id="q" value="1.936413591969857"></td>
+              </tr>
+              <tr>
+                <td class="leftColumn">i (inclination):</td>
+                <td><input type="text" id="i" value="4.968636445431101"></td>
+              </tr>
+              <tr>
+                <td class="leftColumn">OM (longitude of ascending node): </td>
+                <td><input type="text" id="OM" value="279.2913014466917"></td>
+              </tr>
+              <tr>
+                <td class="leftColumn">w (argument of perihelion):</td>
+                <td><input type="text" id="w" value="144.2313764721612"></td>
+              </tr>
+              <tr>
+                <td class="leftColumn">Tp (perihelion date in JD):</td>
+                <td><input type="text" id="Tp" value="2456763.2359405034"></td>
+              </tr>
+            </tbody></table>
+        </div>
+        
+<!-- TEST 2013P5, HORIZON input-->
+        <div id="inputOE_Horizons" style="display:none;">
+            <span class="subsection"><br>Orbital elements (<a href="http://www.comet-toolbox.com/FP.html#" onclick="switchOE(0)">custom</a> / HORIZONS)</span>
+            <textarea rows="10" cols="50" id="inputHorizons">Copy the first two lines from Horizons orbital elements. Ex:
+EC= .1152219626111963   QR= 1.936436915543156   TP= 2456763.3335733749      
+OM= 279.2912869106177   W= 144.2304706636098    IN= 4.968636288060744
+            </textarea>
+        </div>
+          
+        <span class="subsection"><br>Simulation parameters</span>
+        <table>
+          <tbody><tr>
+            <td class="leftColumn">
+              comma separated list of times<br>
+              of emission, in days from Tobs:
+            </td>
+            <td><input type="text" id="synchrones" value="5,10,15,20,25,30,35,40,45,50,55,60"></td>
+          </tr>
+          <tr>
+            <td class="leftColumn">comma separated list of beta:</td>
+            <td><input type="text" id="beta" value="0.05, 0.1, 0.15, 0.2"></td>
+          </tr>
+          <tr>
+            <td class="leftColumn">
+              integration step (days):<br>warning: unstable if &lt; 0.5 day
+            </td>
+            <td><input type="text" id="frogstep" value="1"></td>
+          </tr>
+          <tr>
+            <td class="leftColumn">Tobs (yyyy, mm, dd):</td>
+            <td><input type="text" id="Tobs" value="2013, 9, 25.0"></td>
+          </tr>
+        </tbody></table>
+
+        <br>
+        <center>
+          <input type="button" value="Generate diagram" onclick="FPDiagram();">
+        </center>
+
+        <span class="subsection"><br>Output</span>
+        <textarea rows="10" cols="50" id="output" disabled=""></textarea>
+
+      </form>
+    </div>
+    
+    <div id="examples">
+        Load example simulations:<br>
+        <table border="0" width="600">
+            <tbody><tr>
+                <td>
+                    <a href="" id="ex_1" onclick="loadExample(1); return false"><img src="./FP Javascript_files/p5_20130910.jpg" width="120"></a><br>
+                    <span class="caption">
+                        P/2013 P5, Hubble,<br>
+                        D. Jewitt et al,<br>
+                        2013-09-10 
+                    </span>
+                </td>
+                <td>
+                    <a href="" id="ex_2" onclick="loadExample(2); return false"><img src="./FP Javascript_files/p5_20130923.jpg" width="120"></a><br>
+                    <span class="caption">
+                        P/2013 P5, Hubble,<br>
+                        D. Jewitt et al,<br>
+                        2013-09-23 
+                    </span>
+                </td>
+                <td>
+                    <a href="" id="ex_3" onclick="loadExample(3); return false"><img src="./FP Javascript_files/mcnaught_20070120.jpg" width="120"></a><br>
+                    <span class="caption">
+                        C/2006 P1,<br>
+                        G. Garrad,<br>
+                        2007-01-20 
+                    </span>
+                </td>
+                <td>
+                    <a href="" id="ex_4" onclick="loadExample(4); return false"><img src="./FP Javascript_files/panstarrs_20130324.jpg" width="120"></a><br>
+                    <span class="caption">
+                        C/2011 L4,<br>
+                        S. Korotkiy,<br>
+                        2013-03-24T21:00 
+                    </span>
+                </td>
+            </tr>
+        </tbody></table>
+    </div>
+
+    
+    
+    
+        <br><br>
+    </div>
+
+  </div>
+
+
+
+
+</body></html>

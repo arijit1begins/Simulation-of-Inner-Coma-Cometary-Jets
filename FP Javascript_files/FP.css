@@ -1,0 +1,171 @@
+/* Classes */
+.equ
+{
+    font-family: courier;
+    font-size: 10pt;
+}
+.subsection
+{
+    font-size:14pt;
+    font-weight:bold;
+}
+
+.caption
+{
+    font-size: 8pt;
+}
+
+td a:link, a:visited, a:active, a:hover
+{
+    font-size : 12pt;
+    font-family : sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color : #555753;
+}
+
+a:link, a:visited, a:active, a:hover
+{
+    color : #555753;
+}
+
+body
+{
+    background-color: #eeeeee;
+}
+
+#mainContainer
+{
+    position:relative;
+    width: 1100px;
+    height: 1500px;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+/* Text */
+#div_header
+{
+    width:1080px;
+    height:150px;
+    background-image:url(include/ISON_RGB_20131016_W.jpg);
+}
+
+#titleTxt
+{
+    font-family: sans-serif;
+    font-size:24pt;
+    font-weight:bold;
+    color:#000000;
+    position:absolute;
+    top:50px;
+    left:50px;
+}
+
+#div_navigation
+{
+    position: absolute;
+    top: 120px;
+    width:1080px;
+}
+
+#div_text
+{
+    position:absolute;
+    top: 160px;
+    width:1080px;
+    font-family: sans-serif;
+    font-size: 10pt;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* Finson-Probstein Diagram */
+.labelItalic
+{
+  font-style: italic;
+  color: #888888;
+}
+#diagram
+{
+  width:600px;
+  height:650px;
+  position:absolute;
+  top:430px;
+  left:10px;
+}
+#placeholder
+{
+  width:600px;
+  height:600px;
+  position:absolute;
+  left:0px;
+  top:0px;
+}
+#caption
+{
+    width:600px;
+    position:absolute;
+    top:620px;
+    font-style:italic;
+    font-size:10pt;
+    text-align:center;
+}
+
+/* Input parameters */
+#Controls
+{    
+    width:450px;
+    position:absolute;
+    top:430px;
+    left:620px;
+    /*left:0px;*/
+    background-color:#ffffff;
+    border-style:solid;
+    border-width:1px;
+    padding:10px;
+}
+#Controls table
+{
+  table-layout:fixed;
+  width:450px;
+  border-collapse:collapse;
+}
+#Controls td
+{
+  border: 1px solid black;
+  padding: 5px;
+}
+#Controls td.leftColumn
+{
+  width:250px;
+  text-align:right;
+}
+#Controls input
+{
+  width:130px
+}
+
+/* Examples */
+#examples
+{
+    width:600px;
+    position:absolute;
+    top:1040px;
+    left:0px;
+    text-align: center;
+}
+
+/* References */
+#references
+{
+    width: 100%;
+    position:absolute;
+    top:1280px;
+    left:0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
